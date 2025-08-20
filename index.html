@@ -4,10 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <title>Document</title>
+  <title>Library</title>
 </head>
 <body>
   <script src="script.js" defer></script>
-  
+
+  <button id="open-form" type="button">Open the submit a book dialog</button>
+  <dialog>
+    <p>Please submit the form to add a book.</p>
+    <!-- Maybe have a node here that uses data attribute to toggle betw states -->
+    <form action="">
+      <label for="form-book-title">
+        Title
+        <input autofocus type="text" name="title" id="form-book-title">
+      </label>
+      <button id="confirm-add-book" type="submit">Submit</button>
+      <button id="cancel-add-book" type="submit">Cancel</button>
+    </form>
+  </dialog>
+
+  <table>
+    <caption>Your personal library</caption>
+
+    <colgroup></colgroup>
+    <thead>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Genre</th>
+      <th scope="col">Pages</th>
+      <th scope="col">Is Read?</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Lord of the Rings</td>
+        <td>Tolkien I think</td>
+        <td>Fantasy</td>
+        <td>123</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>
