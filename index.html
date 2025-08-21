@@ -5,21 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
   <title>Library</title>
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <script src="script.js" defer></script>
-
   <button id="open-form" type="button">Open the submit a book dialog</button>
   <dialog>
     <p>Please submit the form to add a book.</p>
+    <p data-indicator=""></p>
     <!-- Maybe have a node here that uses data attribute to toggle betw states -->
     <form action="">
-      <label for="form-book-title">
+      <label for="book-title">
         Title
-        <input autofocus type="text" name="title" id="form-book-title">
       </label>
+      <input autofocus type="text" name="title" id="book-title"
+        required>
+      <label for="book-author">
+        Author
+      </label>
+      <input type="text" name="author" id="book-author">
+      <label for="book-genre">
+        Genre
+      </label>
+      <input type="text" name="genre" id="book-genre">
+      <label for="book-pages">
+        Number of Pages
+      </label>
+      <input type="number" name="pages" id="book-pages" min="1" step="1">
+      <label for="book-is-read">
+        Is Read
+      </label>
+      <input type="checkbox" name="isRead" id="book-is-read">
       <button id="confirm-add-book" type="submit">Submit</button>
       <button id="cancel-add-book" type="submit">Cancel</button>
+      <!-- @TODO: Need to properly handle closing - see <dialog> examples -->
     </form>
   </dialog>
 
@@ -33,15 +51,9 @@
       <th scope="col">Genre</th>
       <th scope="col">Pages</th>
       <th scope="col">Is Read?</th>
+      <th scope="col">Actions</th>
     </thead>
     <tbody>
-      <tr>
-        <td>Lord of the Rings</td>
-        <td>Tolkien I think</td>
-        <td>Fantasy</td>
-        <td>123</td>
-        <td>Yes</td>
-      </tr>
     </tbody>
   </table>
 
