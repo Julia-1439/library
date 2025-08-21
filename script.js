@@ -5,42 +5,29 @@ const MARK_READ_DATA_VAL = "mark-read";
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
 /* Add evt listeners: open the book submission form */
 const formDialog = document.querySelector("dialog");
-const openFormBtn = document.querySelector("#open-form");
-openFormBtn.addEventListener("click", () => {
-    formDialog.showModal();
-});
 
 /* Add evt listeners to the book submission form */
 const form = document.querySelector("form");
 form.addEventListener("submit", (evt) => {
     const submitterBtn = evt.submitter;
     const handler = submitterBtn.id;
-
+    
     if (!handler) {
-        alert("An unknown error occured. Please try again.");
+        throw Error("An unknown error occured. Please try again.");
     }
-
-    // Prevent the form submission since we are processing only on client-side
-    evt.preventDefault();
-    const formData = new FormData(form);
-
-    switch (handler) {
-        case "confirm-add-book": 
-            addBookToLibrary(
-                formData.get("title"),
-                formData.get("author"),
-                formData.get("genre"),
-                formData.get("pages"),
-                formData.get("isRead")
-            );
-            break;
-        case "cancel-add-book":
-            processCancellation();
-            break;
-    }
+    
+    if (handler === "confirm-add-book") {
+        const formData = new FormData(form);
+        addBookToLibrary(
+            formData.get("title"),
+            formData.get("author"),
+            formData.get("genre"),
+            formData.get("pages"),
+            formData.get("isRead")
+        );
+    } 
 
     form.reset()
-    formDialog.close();
 });
 
 // Do an initial processing of form data 
@@ -49,10 +36,6 @@ form.addEventListener("formdata", (evt) => {
     const formData = evt.formData;
     formData.set("isRead", formData.get("isRead") === "on");
 });
-
-function processCancellation() {
-
-}
 
 /* Add evt listeners to the book table to remove & mark as read books */
 // Leverage event bubbling to not add an insane amount of event listeners
