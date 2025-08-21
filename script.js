@@ -61,16 +61,13 @@ tableBody.addEventListener("click", (evt) => {
     }
 
     const btn = target;
-    // @TODO *somehow* identify the uuid of the book 
-
+    const bookElement = btn.parentNode.parentNode;
     if (btn.classList.contains("remove-book")) {
-        // CALL removeBookFromLibrary()
-        // console.log("remove book");
+        removeBookFromLibrary(bookElement);
     }
     // The else case is the button being a mark-as-read w/ "read-book" class
     else {
-        // CALL toggleIsRead();
-        // console.log("mark book as read");
+        toggleIsRead(bookElement);
     } 
 });
 
@@ -144,11 +141,12 @@ function createBookElement(book) {
         if (key === "uuid") {
             // Associate the DOM element with corresponding book object to easily
             // remove or modify it
-            row.setAttribute("data-book-uuid", value);
+            row.setAttribute("data-uuid", value);
             return;
         }
         const cell = document.createElement("td");
         cell.textContent = value;
+        cell.setAttribute("data-property-name", key);
         row.appendChild(cell);
     });
 
@@ -156,11 +154,11 @@ function createBookElement(book) {
     const removeBookBtn = document.createElement("button");
     removeBookBtn.setAttribute("type", "button");
     removeBookBtn.classList.add("remove-book");
-    removeBookBtn.textContent = "🗑️";
+    removeBookBtn.textContent = "Remove";
     const markReadBtn = document.createElement("button");
     markReadBtn.setAttribute("type", "button");
     removeBookBtn.classList.add("read-book");
-    markReadBtn.textContent = "👓";
+    markReadBtn.textContent = "Read";
     const btnCell = document.createElement("td");
     btnCell.appendChild(removeBookBtn);
     btnCell.appendChild(markReadBtn);
@@ -169,6 +167,19 @@ function createBookElement(book) {
     return row;
 }
 
-function removeBookFromLibrary() {
+function toggleIsRead(bookElement) {
+    const workingBook = library.find(isMatchingBook, bookElement);
+    workingBook.toggleIsRead();
+    isReadCell = bookElement.querySelector("[data-property-name=isRead");
+    isReadCell.textContent = workingBook.isRead;
+}
 
+function removeBookFromLibrary(bookElement) {
+    const workingBookIdx = library.findIndex(isMatchingBook, bookElement);
+    library.splice(workingBookIdx, 1);
+    tableBody.removeChild(bookElement);
+}
+
+function isMatchingBook(book) {
+    return book.uuid === this.getAttribute("data-uuid");    
 }
