@@ -119,7 +119,10 @@ function addBookToLibrary(title, author, genre, pages, isRead) {
     displayBooks();
 }
 
-// Clear the table and repopulate it with an updated listing of books
+/**
+ * Called every time the library is modified by one of:
+ * adding a book, removing a book, or updating a book's read status
+ */
 function displayBooks() {
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.lastChild);
@@ -170,14 +173,13 @@ function createBookElement(book) {
 function toggleIsRead(bookElement) {
     const workingBook = library.find(isMatchingBook, bookElement);
     workingBook.toggleIsRead();
-    isReadCell = bookElement.querySelector("[data-property-name=isRead");
-    isReadCell.textContent = workingBook.isRead;
+    displayBooks();
 }
 
 function removeBookFromLibrary(bookElement) {
     const workingBookIdx = library.findIndex(isMatchingBook, bookElement);
     library.splice(workingBookIdx, 1);
-    tableBody.removeChild(bookElement);
+    displayBooks();
 }
 
 function isMatchingBook(book) {
