@@ -1,3 +1,7 @@
+// Global constants
+const REMOVE_DATA_VAL = "remove";
+const MARK_READ_DATA_VAL = "mark-read";
+
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
 /* Add evt listeners: open the book submission form */
 const formDialog = document.querySelector("dialog");
@@ -40,13 +44,12 @@ form.addEventListener("submit", (evt) => {
 });
 
 // Do an initial processing of form data 
+// Note that .set() forces values to a string
 form.addEventListener("formdata", (evt) => {
     const formData = evt.formData;
     formData.set("isRead", formData.get("isRead") === "on");
-    // Note that .set() forces values to a string
 });
 
-// Clear the inputs & close the modal
 function processCancellation() {
 
 }
@@ -62,13 +65,15 @@ tableBody.addEventListener("click", (evt) => {
 
     const btn = target;
     const bookElement = btn.parentNode.parentNode;
-    if (btn.classList.contains("remove-book")) {
+    if (btn.getAttribute("data-action") === REMOVE_DATA_VAL) {
         removeBookFromLibrary(bookElement);
     }
-    // The else case is the button being a mark-as-read w/ "read-book" class
-    else {
-        toggleIsRead(bookElement);
+    else if (btn.getAttribute("data-action") === MARK_READ_DATA_VAL) {
+        toggleBookIsRead(bookElement);
     } 
+    else {
+        throw Error();
+    }
 });
 
 /* INTERNAL PROCESSING ====================================================== */
@@ -109,6 +114,7 @@ Book.prototype.toggleIsRead = function () {
  * @param {String} pages is a number at least 1 in string form
  * @param {String} isRead is either "true" or "false" in string form
  */
+// @TODO refactor parameter list
 function addBookToLibrary(title, author, genre, pages, isRead) {
     pages = +pages;
     isRead = (isRead === "true");   
@@ -131,46 +137,46 @@ function displayBooks() {
     library.forEach(book => {
         const bookElement = createBookElement(book);
         tableBody.appendChild(bookElement);
-    })
+    });
 }
 
-
-// (note) ordering of the properties as they were defined is retained 
 function createBookElement(book) {
     const row = document.createElement("tr");
 
-    const bookMetadata = Object.entries(book); // (note)
-    bookMetadata.forEach(([key, value]) => {
-        if (key === "uuid") {
-            // Associate the DOM element with corresponding book object to easily
-            // remove or modify it
-            row.setAttribute("data-uuid", value);
-            return;
-        }
+    // Associate the DOM element with corresponding book object to easily
+    // remove or modify it
+    row.setAttribute("data-uuid", book.uuid);
+
+    // Create table cells containing the book's metadata
+    const dataToDisplay = Object
+        .entries(book)
+        .filter(([key, value]) => key !== "uuid");
+    const dataCells = dataToDisplay.map(([key, value]) => {
         const cell = document.createElement("td");
+        cell.setAttribute("data-prop-name", key);
         cell.textContent = value;
-        cell.setAttribute("data-property-name", key);
-        row.appendChild(cell);
+        return cell;
     });
 
     // Add buttons to interact with book
-    const removeBookBtn = document.createElement("button");
-    removeBookBtn.setAttribute("type", "button");
-    removeBookBtn.classList.add("remove-book");
-    removeBookBtn.textContent = "Remove";
-    const markReadBtn = document.createElement("button");
-    markReadBtn.setAttribute("type", "button");
-    removeBookBtn.classList.add("read-book");
-    markReadBtn.textContent = "Read";
+    const removeBookBtn = createActionButton(REMOVE_DATA_VAL);
+    const markReadBtn = createActionButton(MARK_READ_DATA_VAL); 
     const btnCell = document.createElement("td");
-    btnCell.appendChild(removeBookBtn);
-    btnCell.appendChild(markReadBtn);
-    row.appendChild(btnCell);
+    btnCell.append(removeBookBtn, markReadBtn);
 
+    row.append(...dataCells, btnCell);
     return row;
 }
 
-function toggleIsRead(bookElement) {
+function createActionButton(action) {
+    const btn = document.createElement("button");
+    btn.setAttribute("type", "button");
+    btn.setAttribute("data-action", action);
+    btn.textContent = action === REMOVE_DATA_VAL ? "Remove" : "Read";
+    return btn;
+}
+
+function toggleBookIsRead(bookElement) {
     const workingBook = library.find(isMatchingBook, bookElement);
     workingBook.toggleIsRead();
     displayBooks();
