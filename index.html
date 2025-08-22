@@ -12,20 +12,21 @@
     command="show-modal" 
     commandfor="form-modal">Open the submit a book dialog</button>
   <dialog id="form-modal">
-    <p>Please submit the form to add a book.</p>
+    <p>Please submit the form to add a book. Fields marked with <span aria-label="required">*</span> are required.</p>
     <p data-indicator=""></p>
     <!-- Alternatively, can use .preventDefault() to prevent transmital and call
      .close() on the dialog to close it :) -->
     <form method="dialog">
       <label for="book-title">
-        Title
+        Title <span aria-label="required">*</span>
       </label>
       <input autofocus type="text" name="title" id="book-title"
         required>
       <label for="book-author">
-        Author
+        Author <span aria-label="required">*</span>
       </label>
-      <input type="text" name="author" id="book-author">
+      <input type="text" name="author" id="book-author"
+        required>
       <label for="book-genre">
         Genre
       </label>
