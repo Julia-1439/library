@@ -98,7 +98,7 @@ Book.prototype.toggleIsRead = function () {
 * @param {String} isRead is either "true" or "false" in string form
 */
 function addBookToLibrary(title, author, genre, pages, isRead) {
-    pages = +pages;
+    pages = +pages || "";
     isRead = (isRead === "true");   
     const uuid = window.crypto.randomUUID();
     const book = new Book(title, author, genre, pages, isRead, uuid);
