@@ -6,12 +6,32 @@
   <link rel="stylesheet" href="style.css">
   <title>Library</title>
   <script src="script.js" defer></script>
+
+  <!-- Import the custom font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body>
+  <header>
+    <ul>
+      <li>Home</li>
+      <li>Profile</li>
+      <li>Settings</li>
+    </ul>
+  </header>
+
   <main>
-    <button type="button"
-      command="show-modal"
-      commandfor="form-modal">Open the submit a book dialog</button>
+    Welcome to Libria, your personal library!
+    <div>
+      <button type="button"
+        command="show-modal"
+        commandfor="form-modal">Add a Book
+      </button>
+      <button type="button">
+        Edit a Book
+      </button>
+    </div>
     <dialog id="form-modal">
       <p>Please submit the form to add a book. Fields marked with <span aria-label="required">*</span> are required.</p>
       <form method="dialog">
@@ -42,7 +62,6 @@
       </form>
     </dialog>
     <table>
-      <caption>Your personal library</caption>
       <colgroup></colgroup>
       <thead>
         <th scope="col">Title</th>
@@ -56,6 +75,10 @@
       </tbody>
     </table>
   </main>
+
+  <footer>
+    Footer placeholder content
+  </footer>
 
 </body>
 </html>
