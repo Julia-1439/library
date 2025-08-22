@@ -3,8 +3,6 @@ const REMOVE_DATA_VAL = "remove";
 const MARK_READ_DATA_VAL = "mark-read";
 
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
-/* Add evt listeners: open the book submission form */
-const formDialog = document.querySelector("dialog");
 
 /* Add evt listeners to the book submission form */
 const form = document.querySelector("form");
