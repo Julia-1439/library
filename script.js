@@ -38,7 +38,7 @@ form.addEventListener("formdata", (evt) => {
 });
 
 /* Add evt listeners to the book table to remove & mark as read books */
-// Leverage event bubbling to not add an insane amount of event listeners
+// Leverage event bubbling to not add more event listeners than necessary
 const tableBody = document.querySelector("tbody");
 tableBody.addEventListener("click", (evt) => {
     const target = evt.target;
@@ -131,8 +131,8 @@ function createBookElement(book) {
     
     // Create table cells containing the book's metadata
     const dataToDisplay = Object
-    .entries(book)
-    .filter(([key, value]) => key !== "uuid");
+        .entries(book)
+        .filter(([key, value]) => key !== "uuid");
     const dataCells = dataToDisplay.map(([key, value]) => {
         const cell = document.createElement("td");
         cell.setAttribute("data-prop-name", key);
