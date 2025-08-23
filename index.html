@@ -39,7 +39,7 @@
           Title <span aria-label="required">*</span>
         </label>
         <input autofocus type="text" name="title" id="book-title"
-          required>
+          required maxlength="50">
         <label for="book-author">
           Author <span aria-label="required">*</span>
         </label>
@@ -54,7 +54,7 @@
         </label>
         <input type="number" name="pages" id="book-pages" min="1" step="1">
         <label for="book-is-read">
-          Is Read
+          Have you read?
         </label>
         <input type="checkbox" name="isRead" id="book-is-read">
         <button id="confirm-add-book" class="major-btn">Submit</button>
@@ -66,7 +66,8 @@
       <caption>
         The books in your library. Click the buttons to the side to add or edit a book. 
       </caption>
-      <colgroup>
+      <colgroup> 
+        <!-- @TODO: move these to the stylesheet -->
         <col style="width: 40ch;">
         <col style="width: 30ch;">
         <col style="width: 20ch;">
