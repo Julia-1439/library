@@ -1,6 +1,11 @@
-// Global constants
+/* Global constants ========================================================= */
+
+// Utilized to distinguish what each action button does to avoid adding event
+// listeners to each and every action button, which can cause performance issues
 const REMOVE_DATA_VAL = "remove";
 const MARK_READ_DATA_VAL = "mark-read";
+
+// Connect each Book property to the table column they belong to
 const PROP_TO_ID = {
     title: "col-title",
     author: "col-author",
@@ -52,7 +57,9 @@ tableBody.addEventListener("click", (evt) => {
     }
     
     const btn = target;
-    const bookElement = btn.parentNode.parentNode;
+    const bookElement = tableBody.querySelector(
+        `[data-uuid="${btn.getAttribute("data-book-uuid")}"]`
+    );
     if (btn.getAttribute("data-action") === REMOVE_DATA_VAL) {
         removeBookFromLibrary(bookElement);
     }
@@ -149,20 +156,23 @@ function createBookElement(book) {
     });
     
     // Add buttons to interact with book
-    const removeBookBtn = createActionButton(REMOVE_DATA_VAL);
-    const markReadBtn = createActionButton(MARK_READ_DATA_VAL); 
-    const btnCell = document.createElement("td");
-    btnCell.setAttribute("headers", "col-actions");
-    btnCell.append(removeBookBtn, markReadBtn);
+    const actionsCell = document.createElement("td");
+    const btnsContainer = document.createElement("div");
+    const removeBookBtn = createActionButton(REMOVE_DATA_VAL, book.uuid);
+    const markReadBtn = createActionButton(MARK_READ_DATA_VAL, book.uuid); 
+    btnsContainer.append(removeBookBtn, markReadBtn);
+    actionsCell.setAttribute("headers", "col-actions");
+    actionsCell.appendChild(btnsContainer);
     
-    row.append(...dataCells, btnCell);
+    row.append(...dataCells, actionsCell);
     return row;
 }
 
-function createActionButton(action) {
+function createActionButton(action, bookUuid) {
     const btn = document.createElement("button");
     btn.setAttribute("type", "button");
     btn.setAttribute("data-action", action);
+    btn.setAttribute("data-book-uuid", bookUuid)
     btn.textContent = action === REMOVE_DATA_VAL ? "Remove" : "Read";
     return btn;
 }

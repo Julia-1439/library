@@ -205,6 +205,18 @@ caption {
   /* display: none; */
 }
 
+[headers="col-actions"] div {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  /* Note: flex is applied to this container div instead of td since applying
+  to td seems to yield a strange extra border. */
+  /* Note: flex was chosen for responsive layout on larger zooms and adding a
+  responsive margin between the buttons. (A static left/right margin without 
+  flex breaks on a higher zoom. */
+}
+
 [headers="col-actions"] button {
   width: 60px;
   font-family: inherit;
@@ -212,11 +224,6 @@ caption {
   font-size: 0.8rem;
 }
 
-[headers="col-actions"] button + button {
-  /* margin-left: var(--primary-gap-size);  */
-  /* Note that converting the table cell to a flex/grid to add a gap strangely
-  makes the border thicker around the cells, so margin was used instead. */
-}
 
 
 /* ========================================================================== */
