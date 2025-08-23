@@ -16,7 +16,7 @@ const PROP_TO_ID = {
 
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
 
-/* Add evt listeners to the book submission form */
+/* Enable processing the form data once it is submitted or cancelled */
 const form = document.querySelector("form");
 form.addEventListener("submit", (evt) => {
     const submitterBtn = evt.submitter;
@@ -41,13 +41,15 @@ form.addEventListener("submit", (evt) => {
 });
 
 // Do an initial processing of form data 
-// Note that .set() forces values to a string
 form.addEventListener("formdata", (evt) => {
     const formData = evt.formData;
     formData.set("isRead", formData.get("isRead") === "on");
+    // Note that .set() forces values to a string
 });
 
-/* Add evt listeners to the book table to remove & mark as read books */
+
+
+/* Enable removing & marking books as read */
 // Leverage event bubbling to not add more event listeners than necessary
 const tableBody = document.querySelector("tbody");
 tableBody.addEventListener("click", (evt) => {
