@@ -15,20 +15,20 @@
 <body>
   <header>
     <ul>
-      <li><a href=""><img src="assets/home.svg" alt="House icon">Home</a></li>
-      <li><a href=""><img src="assets/account-circle.svg" alt="Account circle icon">Profile</a></li>
-      <li><a href=""><img src="assets/cog.svg" alt="Cog icon">Settings</a></li>
+      <li><a><img src="assets/home.svg" alt="House icon">Home</a></li>
+      <li><a><img src="assets/account-circle.svg" alt="Account circle icon">Profile</a></li>
+      <li><a><img src="assets/cog.svg" alt="Cog icon">Settings</a></li>
     </ul>
   </header>
 
   <main>
     <h1 id="greeting">Welcome to Libria, your personal library!</h1>
     <div id="main-buttons-container">
-      <button type="button"
+      <button type="button" class="major-btn"
         command="show-modal"
         commandfor="form-modal">Add a Book
       </button>
-      <button type="button">
+      <button type="button" class="major-btn">
         Edit a Book
       </button>
     </div>
@@ -57,8 +57,8 @@
           Is Read
         </label>
         <input type="checkbox" name="isRead" id="book-is-read">
-        <button id="confirm-add-book">Submit</button>
-        <button id="cancel-add-book" formnovalidate>Cancel</button>
+        <button id="confirm-add-book" class="major-btn">Submit</button>
+        <button id="cancel-add-book" class="major-btn" formnovalidate>Cancel</button>
       </form>
     </dialog>
 

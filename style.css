@@ -24,10 +24,12 @@ html {
   font-family: "Roboto", sans-serif, var(--fallback-font-stack);
 
   --fallback-font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; 
-  --primary-gap-size: 10px;
-  --bigger-gap-size: 20px;
+  --primary-gap-size: 15px;
+  --bigger-gap-size: 25px;
   --header-and-footer-size: 3rem;
   --icon-size: calc(var(--header-and-footer-size) / 2);
+  --major-btn-height: 36px;
+  --major-btn-font-size: 0.8rem;
 
   --palette-dominant: hsl(266, 46%, 41%);
   --palette-dominant-dark: hsl(266, 80%, 41%);
@@ -44,6 +46,22 @@ body {
   flex-direction: column;
   min-height: 100vh;
 }
+
+.major-btn {
+  cursor: pointer;
+  border: none;
+  height: var(--major-btn-height);
+  border-radius: calc(var(--major-btn-height) / 2);
+  font-size: var(--major-btn-font-size);
+  box-shadow: 3px 3px 6px var(--palette-light-gray);
+  font-weight: bold;
+  font-family: inherit;
+}
+
+.major-btn:hover {
+  filter: saturate(150%);
+}
+
 
 /* ========================================================================== */
 
@@ -102,21 +120,9 @@ main {
 }
 
 #main-buttons-container button {
-  cursor: pointer;
-  border: none;
-  height: 36px;
   width: 150px;
-  border-radius: calc(36px / 2);
   background-color: var(--palette-dominant);
-  box-shadow: 3px 3px 6px var(--palette-light-gray);
   color: white;
-  font-weight: bold;
-  font-family: inherit;
-  font-size: 0.8rem;
-}
-
-#main-buttons-container button:hover {
-  background-color: var(--palette-dominant-dark);
 }
 
 /* ========================================================================== */
@@ -204,17 +210,65 @@ footer {
 
 /* ========================================================================== */
 
+dialog {
+  margin: auto;
+  padding: calc(var(--bigger-gap-size) * 2);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 2px 11px -3px var(--palette-dark-gray);
+}
+
+dialog p:first-child {
+  margin-bottom: var(--bigger-gap-size);
+}
+
+dialog button {
+  width: 50%;
+  justify-self: center;
+  color: white;
+}
+
+#confirm-add-book {
+  grid-column: 1 / -1;
+  background-color: #41BA8D;
+  margin-top: 50px;
+}
+
+#cancel-add-book {
+  grid-column: 1 / -1;
+  background-color: #231F20;
+}
+
+/* ========================================================================== */
 
 form { 
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  grid-template-columns: 200px 1fr;
+  gap: var(--primary-gap-size);
 }
 
-form label {
+label {
   justify-self: end;
 }
 
-form input {
+input:not([type="checkbox"]) {
   justify-self: start;
+
+  width: 100%;
+  height: 2rem;
+  padding: 8px 17px;
+  border-radius: calc(2rem / 2);
+  font-size: 1rem;
+  border: none;
+  font-family: inherit;
+  background-color: var(--palette-light-gray);
+}
+
+input[type="checkbox"] {
+  justify-self: start;
+}
+
+input:not([type="checkbox"]):focus {
+  outline: 2px solid #F88E20;
+  outline-offset: 4px;
 }
