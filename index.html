@@ -44,15 +44,17 @@
           Author <span aria-label="required">*</span>
         </label>
         <input type="text" name="author" id="book-author"
-          required>
+          required maxlength="50">
         <label for="book-genre">
           Genre
         </label>
-        <input type="text" name="genre" id="book-genre">
+        <input type="text" name="genre" id="book-genre"
+          maxlength="30">
         <label for="book-pages">
           Number of Pages
         </label>
-        <input type="number" name="pages" id="book-pages" min="1" step="1">
+        <input type="number" name="pages" id="book-pages" 
+          min="1" max="9999" step="1">
         <label for="book-is-read">
           Have you read?
         </label>
