@@ -200,6 +200,8 @@ caption {
   font-size: 1.5rem; 
 }
 
+/* Scrapped feature */
+col:nth-child(6),
 #col-actions,
 [headers="col-actions"] {
   /* display: none; */
