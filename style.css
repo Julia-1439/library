@@ -130,7 +130,7 @@ main {
 
 
 table {
-  max-width: 80%;
+  width: 80%;
   justify-self: center;
   
   table-layout: fixed;
@@ -141,14 +141,28 @@ table {
   letter-spacing: 1px;
 }
 
+col:nth-child(1) {
+  width: 35%; 
+}
+col:nth-child(2) {
+  width: 20%;
+}
+col:nth-child(3) {
+  width: 15%;
+}
+col:nth-child(4),
+col:nth-child(5) {
+  width: 7%;
+}
+
 td, th {
  border: 1px solid black;
  padding: 10px 20px;
 }
 
 td {
-  hyphens: auto;
-  /* Not working */
+  /* hyphens: auto; */ /* Does not seem to work */
+  word-wrap: break-word;
 }
 
 tr {
