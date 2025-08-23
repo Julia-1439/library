@@ -14,7 +14,6 @@ major learnings/exercised:
 - dialog
 - data-* attribute
 - defining classes for common attributes like "major buttons"
-- It is worth noting I utilized a more semantic way (opinionated) of processing the form data when it is integrated with a dialogue element. Odin Project suggests using preventDefault(), but I opted to use formmethod="dialog" instead. I still experimented with preventDefault() and understand that it prevents the data being transmitted and form being reset. 
 
 ## Credits 
 ### Sources of Help

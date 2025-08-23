@@ -29,6 +29,7 @@
         commandfor="form-modal">Add a Book
       </button>
     </div>
+    <!-- It is worth noting I utilized a more semantic way (opinionated) of processing the form data when it is integrated with a dialogue element. Odin Project suggests using preventDefault(), but I opted to use formmethod="dialog" instead. I still experimented with preventDefault() and understand that it prevents the data being transmitted and form being reset.  -->
     <dialog id="form-modal">
       <p>Please submit the form to add a book. Fields marked with <span aria-label="required">*</span> are required.</p>
       <form method="dialog">
