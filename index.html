@@ -22,9 +22,7 @@
   </header>
 
   <main>
-    <p id="greeting">
-      Welcome to Libria, your personal library!
-    </p>
+    <h1 id="greeting">Welcome to Libria, your personal library!</h1>
     <div id="main-buttons-container">
       <button type="button"
         command="show-modal"
@@ -63,22 +61,26 @@
         <button id="cancel-add-book" formnovalidate>Cancel</button>
       </form>
     </dialog>
+
     <table>
+      <caption>
+        The books in your library. Click the buttons to the side to add or edit a book. 
+      </caption>
       <colgroup>
-        <col id="col-title" style="width: 400px;">
-        <col id="col-title">
-        <col>
-        <col>
-        <col>
-        <col>
+        <col style="width: 40ch;">
+        <col style="width: 30ch;">
+        <col style="width: 20ch;">
+        <col style="width: 4ch;">
+        <col style="width: 4ch;">
+        <col style="width: min-content;">
       </colgroup>
       <thead>
-        <th scope="col">Title</th>
-        <th scope="col">Author</th>
-        <th scope="col">Genre</th>
-        <th scope="col">Pages</th>
-        <th scope="col">Is Read?</th>
-        <th scope="col">Actions</th>
+        <th id="col-title" scope="col">Title</th>
+        <th id="col-author" scope="col">Author</th>
+        <th id="col-genre" scope="col">Genre</th>
+        <th id="col-pages" scope="col">Pages</th>
+        <th id="col-read" scope="col">Read?</th>
+        <th id="col-actions" scope="col">Actions</th>
       </thead>
       <tbody>
       </tbody>

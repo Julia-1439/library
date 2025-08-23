@@ -1,6 +1,13 @@
 // Global constants
 const REMOVE_DATA_VAL = "remove";
 const MARK_READ_DATA_VAL = "mark-read";
+const PROP_TO_ID = {
+    title: "col-title",
+    author: "col-author",
+    genre: "col-genre",
+    pages: "col-pages",
+    isRead: "col-read"
+};
 
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
 
@@ -132,8 +139,11 @@ function createBookElement(book) {
         .entries(book)
         .filter(([key, value]) => key !== "uuid");
     const dataCells = dataToDisplay.map(([key, value]) => {
+        if(key === "isRead")
+            value = value ? "✓" : "×"; 
+
         const cell = document.createElement("td");
-        cell.setAttribute("data-prop-name", key);
+        cell.setAttribute("headers", PROP_TO_ID[key]);
         cell.textContent = value;
         return cell;
     });
@@ -142,6 +152,7 @@ function createBookElement(book) {
     const removeBookBtn = createActionButton(REMOVE_DATA_VAL);
     const markReadBtn = createActionButton(MARK_READ_DATA_VAL); 
     const btnCell = document.createElement("td");
+    btnCell.setAttribute("headers", "col-actions");
     btnCell.append(removeBookBtn, markReadBtn);
     
     row.append(...dataCells, btnCell);
@@ -171,3 +182,11 @@ function removeBookFromLibrary(bookElement) {
 function isMatchingBook(book) {
     return book.uuid === this.getAttribute("data-uuid");    
 }
+
+
+
+// @TESTING
+addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
+addBookToLibrary("Foo title bigger", "Bar author bigger", "Nya genre bigger", "", "false");
+addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
+addBookToLibrary("Foo title bigger", "Bar author bigger", "Nya genre bigger", "", "false");

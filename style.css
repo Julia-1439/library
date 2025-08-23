@@ -69,8 +69,9 @@ header li {
 header a {
   height: 100%;
   display: grid;
-  grid-template-columns: min-content 1fr;
-  gap: 5px;
+  width: min-content;
+  grid-template-columns: repeat(2, min-content);
+  gap: var(--primary-gap-size);
   align-items: center;
 
   color: inherit;
@@ -81,7 +82,6 @@ header img {
 }
 
 /* ========================================================================== */
-
 
 main {
   flex: 1;
@@ -119,15 +119,77 @@ main {
   background-color: var(--palette-dominant-dark);
 }
 
+/* ========================================================================== */
+
+
 table {
   width: 80%;
   justify-self: center;
 
   border-collapse: collapse;
   border: 2px solid black;
-  letter-spacing: 1px;
+
   font-size: 1rem;
+  letter-spacing: 1px;
 }
+
+td, th {
+ border: 1px solid black;
+ padding: 10px 20px;
+}
+
+tr {
+  height: 3rem;
+}
+
+tr:nth-child(even) td {
+  background-color: rgb(250, 250, 250);
+}
+
+tr:nth-child(odd) td {
+  background-color: rgb(245, 245, 245);
+}
+
+caption {
+  padding: 10px;
+  color: var(--palette-dark-gray);
+}
+
+/* Style specific columns */
+[headers="col-title"], 
+[headers="col-author"], 
+[headers="col-genre"] {
+  text-transform: capitalize;
+  text-wrap: balance;
+}
+
+[headers="col-pages"],
+[headers="col-read"],
+[headers="col-actions"] {
+  text-align: center;
+}
+
+[headers="col-read"] {
+  font-size: 1.5rem; 
+}
+
+#col-actions,
+[headers="col-actions"] {
+  /* display: none; */
+}
+
+[headers="col-actions"] button {
+  width: 60px;
+  font-family: inherit;
+  padding: 4px;
+}
+
+[headers="col-actions"] button + button {
+  margin-left: var(--primary-gap-size); 
+  /* Note that converting the table cell to a flex/grid to add a gap strangely
+  makes the border thicker around the cells, so margin was used instead. */
+}
+
 
 /* ========================================================================== */
 
@@ -156,11 +218,3 @@ form label {
 form input {
   justify-self: start;
 }
-
-
-/* Properties */
-/**
-the table cells: 
-  text-transform
-  wrap
-*/
