@@ -47,8 +47,6 @@ form.addEventListener("formdata", (evt) => {
     // Note that .set() forces values to a string
 });
 
-
-
 /* Enable removing & marking books as read */
 // Leverage event bubbling to not add more event listeners than necessary
 const tableBody = document.querySelector("tbody");
@@ -174,7 +172,7 @@ function createActionButton(action, bookUuid) {
     const btn = document.createElement("button");
     btn.setAttribute("type", "button");
     btn.setAttribute("data-action", action);
-    btn.setAttribute("data-book-uuid", bookUuid)
+    btn.setAttribute("data-book-uuid", bookUuid);
     btn.textContent = action === REMOVE_DATA_VAL ? "Remove" : "Read";
     return btn;
 }
@@ -195,9 +193,9 @@ function isMatchingBook(book) {
     return book.uuid === this.getAttribute("data-uuid");    
 }
 
+/* ========================================================================== */
 
-
-// @TESTING
+// Placeholder content to show off the features
 addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
 addBookToLibrary("Foo title bigger", "Bar author bigger", "Nya genre bigger", "", "false");
 addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
