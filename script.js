@@ -15,6 +15,11 @@ const PROP_TO_ID = {
 };
 
 /* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
+const dialog = document.querySelector("dialog");
+const addABookBtn = document.querySelector("#add-a-book");
+addABookBtn.addEventListener("click", () => {
+    dialog.showModal();
+});
 
 /* Enable processing the form data once it is submitted or cancelled */
 const form = document.querySelector("form");

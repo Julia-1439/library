@@ -24,13 +24,10 @@
   <main>
     <h1 id="greeting">Welcome to Libria, your personal library!</h1>
     <div id="main-buttons-container">
-      <button type="button" class="major-btn"
-        command="show-modal"
-        commandfor="form-modal">Add a Book
-      </button>
+      <button type="button" id="add-a-book" class="major-btn">Add a Book</button>
     </div>
     <!-- It is worth noting I utilized a more semantic way (opinionated) of processing the form data when it is integrated with a dialogue element. Odin Project suggests using preventDefault(), but I opted to use formmethod="dialog" instead. I still experimented with preventDefault() and understand that it prevents the data being transmitted and form being reset.  -->
-    <dialog id="form-modal">
+    <dialog>
       <p>Please submit the form to add a book. Fields marked with <span aria-label="required">*</span> are required.</p>
       <form method="dialog">
         <label for="book-title">
