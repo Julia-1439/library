@@ -18,6 +18,8 @@ major learnings/exercised:
 
 Time spent: 20 hours + 1:45 hour incorporating feedback
 
+Known bug: Samsung Internet does not show the modal when clicking Add a Book. 
+
 ## Credits 
 ### Sources of Help
 These are helpful threads I consulted for help over the course of developing this project. Note that most documentation I looked at is omitted due to how many I look at.
