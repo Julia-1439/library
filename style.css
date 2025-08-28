@@ -113,12 +113,6 @@ main {
   color: var(--palette-dark-gray);
 }
 
-#main-buttons-container {
-  display: grid;
-  grid-template-columns: repeat(2, min-content);
-  gap: var(--bigger-gap-size);
-}
-
 #main-buttons-container button {
   width: 150px;
   background-color: var(--palette-dominant);
