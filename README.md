@@ -14,6 +14,9 @@ major learnings/exercised:
 - dialog
 - data-* attribute
 - defining classes for common attributes like "major buttons"
+- checking & testing browser compatability
+
+Time spent: 20 hours + 1:45 hour incorporating feedback
 
 ## Credits 
 ### Sources of Help
@@ -25,6 +28,7 @@ These are helpful threads I consulted for help over the course of developing thi
 - different ways to delete nodes: https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
 - opinion on for vs forEach: ttps://stackoverflow.com/questions/43031988/javascript-efficiency-for-vs-foreach
 - MDN pages: button, dialog, Submit event
+- helpful reference for custom font (TOP resource): https://web.dev/articles/font-best-practices
 
 ### Assets
 - Utilized parts of [MDN minimal-table.css](https://github.com/mdn/learning-area/blob/main/html/tables/advanced/minimal-table.css)
