@@ -201,7 +201,7 @@ function isMatchingBook(book) {
 /* ========================================================================== */
 
 // Placeholder content to show off the features
-addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
-addBookToLibrary("Foo title bigger", "Bar author bigger", "Nya genre bigger", "", "false");
-addBookToLibrary("foo title", "bar author", "Nya genre", "214", "true");
-addBookToLibrary("Foo title bigger", "Bar author bigger", "Nya genre bigger", "", "false");
+addBookToLibrary("foo title", "bar author", "genre", "214", "true");
+addBookToLibrary("Foo title bigger", "Bar author bigger", "genre bigger this wraps", "", "false");
+addBookToLibrary("foo title", "bar author", "genre", "214", "true");
+addBookToLibrary("Foo title bigger", "Bar author bigger", "genre bigger this wraps", "", "false");
