@@ -28,7 +28,6 @@ html {
   --primary-gap-size: 15px;
   --bigger-gap-size: 25px;
   --header-and-footer-size: 3rem;
-  --icon-size: calc(var(--header-and-footer-size) / 2);
   --major-btn-height: 36px;
   --major-btn-font-size: 0.8rem;
 
@@ -94,7 +93,7 @@ header a {
 }
 
 header img {
-  height: 75%;
+  height: calc(0.75 * var(--header-and-footer-size));
 }
 
 /* ========================================================================== */
