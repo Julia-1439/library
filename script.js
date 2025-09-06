@@ -192,12 +192,10 @@ function createBookElement(book) {
     // Create table cells containing the book's metadata
     const dataToDisplay = book.dataToDisplay;
     const dataCells = dataToDisplay.map(([key, value]) => {
-        if(key === "isRead")
-            value = value ? "✓" : "×"; 
-            // reorder this conditional to below
-
         const cell = document.createElement("td");
         cell.setAttribute("headers", HTML_COL_ID[key]);
+        if(key === "isRead")
+            value = value ? "✓" : "×"; 
         cell.textContent = value;
         return cell;
     });
