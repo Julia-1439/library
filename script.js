@@ -1,12 +1,10 @@
-/* Global constants ========================================================= */
+/* ========================================================================== */
+/* Global constants */
+/* ========================================================================== */
 
-// Utilized to distinguish what each action button does to avoid adding event
-// listeners to each and every action button, which can cause performance issues
-const REMOVE_DATA_VAL = "remove";
-const MARK_READ_DATA_VAL = "mark-read";
-
-// Connect each Book property to the table column they belong to
-const PROP_TO_ID = {
+// Used to connect each table cell to the column they belong to. 
+// This enables easier styling of certain columns. 
+const HTML_COL_ID = {
     title: "col-title",
     author: "col-author",
     genre: "col-genre",
@@ -14,7 +12,11 @@ const PROP_TO_ID = {
     isRead: "col-read"
 };
 
-/* INTERACTIVITY FOR THE USER INTERFACE ===================================== */
+/* ========================================================================== */
+/* Interactivity for the User Interface */
+/* ========================================================================== */
+
+/* Enable user to open the dialog to add a book */
 const dialog = document.querySelector("dialog");
 const addABookBtn = document.querySelector("#add-a-book");
 addABookBtn.addEventListener("click", () => {
@@ -45,7 +47,7 @@ form.addEventListener("submit", (evt) => {
     form.reset()
 });
 
-// Do an initial processing of form data 
+/* Do an initial processing of form data */ 
 form.addEventListener("formdata", (evt) => {
     const formData = evt.formData;
     formData.set("isRead", formData.get("isRead") === "on");
@@ -53,9 +55,9 @@ form.addEventListener("formdata", (evt) => {
 });
 
 /* Enable removing & marking books as read */
-// Leverage event bubbling to not add more event listeners than necessary
 const tableBody = document.querySelector("tbody");
 tableBody.addEventListener("click", (evt) => {
+    // Leverage event delegation to not add more event listeners than necessary
     const target = evt.target;
     if(target.type !== "button") {
         return;
@@ -65,10 +67,10 @@ tableBody.addEventListener("click", (evt) => {
     const bookElement = tableBody.querySelector(
         `[data-uuid="${btn.getAttribute("data-book-uuid")}"]`
     );
-    if (btn.getAttribute("data-action") === REMOVE_DATA_VAL) {
+    if (btn.getAttribute("data-action") === "remove") {
         removeBookFromLibrary(bookElement);
     }
-    else if (btn.getAttribute("data-action") === MARK_READ_DATA_VAL) {
+    else if (btn.getAttribute("data-action") === "mark-read") {
         toggleBookIsRead(bookElement);
     } 
     else {
@@ -76,7 +78,9 @@ tableBody.addEventListener("click", (evt) => {
     }
 });
 
-/* INTERNAL PROCESSING ====================================================== */
+/* ========================================================================== */
+/* Internal logic (separate from Display logic) */
+/* ========================================================================== */
 
 const library = [];
 
@@ -107,7 +111,8 @@ Book.prototype.toggleIsRead = function () {
 };
 
 /**
-* 
+* Creates a new Book object and adds it to the library. Called each time a 
+* the "Add a Book" form is submitted by the user.
 * @param {String} title 
 * @param {String} author 
 * @param {String} genre 
@@ -124,9 +129,15 @@ function addBookToLibrary(title, author, genre, pages, isRead) {
     displayBooks();
 }
 
+/* ========================================================================== */
+/* Display logic */
+/* ========================================================================== */
+
 /**
-* Called every time the library is modified by one of:
-* adding a book, removing a book, or updating a book's read status
+* Called every time the library is modified by one of: adding a book, removing 
+* a book, or updating a book's read status. 
+* Operates by removing all current books, then readding them to surface the
+* updated information. 
 */
 function displayBooks() {
     while (tableBody.firstChild) {
@@ -139,6 +150,11 @@ function displayBooks() {
     });
 }
 
+/**
+ * Utilized by `displayBooks()` to display books to the user
+ * @param {Book} book 
+ * @returns <tr> element containing `book`'s data
+ */
 function createBookElement(book) {
     const row = document.createElement("tr");
     
@@ -155,7 +171,7 @@ function createBookElement(book) {
             value = value ? "✓" : "×"; 
 
         const cell = document.createElement("td");
-        cell.setAttribute("headers", PROP_TO_ID[key]);
+        cell.setAttribute("headers", HTML_COL_ID[key]);
         cell.textContent = value;
         return cell;
     });
@@ -163,8 +179,8 @@ function createBookElement(book) {
     // Add buttons to interact with book
     const actionsCell = document.createElement("td");
     const btnsContainer = document.createElement("div");
-    const removeBookBtn = createActionButton(REMOVE_DATA_VAL, book.uuid);
-    const markReadBtn = createActionButton(MARK_READ_DATA_VAL, book.uuid); 
+    const removeBookBtn = createActionButton("remove", book.uuid);
+    const markReadBtn = createActionButton("mark-read", book.uuid); 
     btnsContainer.append(removeBookBtn, markReadBtn);
     actionsCell.setAttribute("headers", "col-actions");
     actionsCell.appendChild(btnsContainer);
@@ -173,34 +189,60 @@ function createBookElement(book) {
     return row;
 }
 
+/**
+ * Helper function to create "remove" or "mark as read" buttons. Utilized each
+ * time `createBookElement()` is called. 
+ * @param {String} action one of "remove" or "read" 
+ * @param {String} bookUuid 
+ * @returns 
+ */
 function createActionButton(action, bookUuid) {
     const btn = document.createElement("button");
     btn.setAttribute("type", "button");
     btn.setAttribute("data-action", action);
     btn.setAttribute("data-book-uuid", bookUuid);
-    btn.textContent = action === REMOVE_DATA_VAL ? "Remove" : "Read";
+    btn.textContent = (action === "remove") ? "Remove" : "Read";
     return btn;
 }
 
+/* ========================================================================== */
+/* Book table's event handlers */
+/* ========================================================================== */
+
+/**
+ * Click event handler for `bookElement`'s "remove" button
+ * @param {<tr>} bookElement 
+ */
 function toggleBookIsRead(bookElement) {
     const workingBook = library.find(isMatchingBook, bookElement);
     workingBook.toggleIsRead();
     displayBooks();
 }
 
+/**
+ * Click event handler for `bookElement`'s "mark as read" button
+ * @param {<tr>} bookElement 
+ */
 function removeBookFromLibrary(bookElement) {
     const workingBookIdx = library.findIndex(isMatchingBook, bookElement);
     library.splice(workingBookIdx, 1);
     displayBooks();
 }
 
+/**
+ * Helper function to identify the row `book` belongs to, to remove or update 
+ * the display. 
+ * @param {Book} book 
+ * @returns Boolean whether the row has the same uuid as `book` 
+ */
 function isMatchingBook(book) {
     return book.uuid === this.getAttribute("data-uuid");    
 }
 
 /* ========================================================================== */
+/* Placeholder content to show off the features */
+/* ========================================================================== */
 
-// Placeholder content to show off the features
 addBookToLibrary("foo title", "bar author", "genre", "214", "true");
 addBookToLibrary("Foo title bigger", "Bar author bigger", "genre bigger this wraps", "", "false");
 addBookToLibrary("foo title", "bar author", "genre", "214", "true");
