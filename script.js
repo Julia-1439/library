@@ -94,17 +94,46 @@ const library = [];
 * @param {String} uuid
 */
 class Book {
+    #title;
+    #author;
+    #genre;
+    #pages;
+    #isRead;
+    #uuid;
+
     constructor(title, author, genre, pages, isRead, uuid) {
-        this.title = title;
-        this.author = author;
-        this.genre = genre;
-        this.pages = pages;
-        this.isRead = isRead;
-        this.uuid = uuid;
+        this.#title = title; // r
+        this.#author = author; // r 
+        this.#genre = genre; // r
+        this.#pages = pages; // r
+        this.#isRead = isRead; // rw (write via function toggleIsRead())
+        this.#uuid = uuid; // r
     }
 
+    get title() { return this.#title; }
+    get author() { return this.#author; }
+    get genre() { return this.#genre; }
+    get pages() { return this.#pages; }
+    get isRead() { return this.#isRead; }
+    get uuid() { return this.#uuid; }
+    
     toggleIsRead() {
-        this.isRead = !this.isRead;
+        this.#isRead = !this.isRead;
+    }
+
+    /**
+     * Returns an array of this book's private elements on which 
+     * createBookElement() will iterate. 
+     * Private elements are nonaccessible and nonenumerable, thus this getter.
+     */
+    get dataToDisplay() {
+        return Object.entries({
+            "title": this.title,
+            "author": this.author,
+            "genre": this.genre,
+            "pages": this.pages,
+            "isRead": this.isRead,
+        });
     }
 }
 
@@ -161,12 +190,11 @@ function createBookElement(book) {
     row.setAttribute("data-uuid", book.uuid);
     
     // Create table cells containing the book's metadata
-    const dataToDisplay = Object
-        .entries(book)
-        .filter(([key, value]) => key !== "uuid");
+    const dataToDisplay = book.dataToDisplay;
     const dataCells = dataToDisplay.map(([key, value]) => {
         if(key === "isRead")
             value = value ? "✓" : "×"; 
+            // reorder this conditional to below
 
         const cell = document.createElement("td");
         cell.setAttribute("headers", HTML_COL_ID[key]);
