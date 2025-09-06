@@ -93,22 +93,20 @@ const library = [];
 * @param {Boolean} isRead 
 * @param {String} uuid
 */
-function Book(title, author, genre, pages, isRead, uuid) {
-    if (!new.target) {
-        throw Error("You must use the 'new' operator to call the constructor");
+class Book {
+    constructor(title, author, genre, pages, isRead, uuid) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.pages = pages;
+        this.isRead = isRead;
+        this.uuid = uuid;
     }
-    
-    this.title = title;
-    this.author = author;
-    this.genre = genre;
-    this.pages = pages;
-    this.isRead = isRead;
-    this.uuid = uuid;
-}
 
-Book.prototype.toggleIsRead = function () {
-    this.isRead = !this.isRead;
-};
+    toggleIsRead() {
+        this.isRead = !this.isRead;
+    }
+}
 
 /**
 * Creates a new Book object and adds it to the library. Called each time a 
