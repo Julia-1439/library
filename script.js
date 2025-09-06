@@ -91,7 +91,6 @@ const library = [];
 * @param {String} genre 
 * @param {Number} pages 
 * @param {Boolean} isRead 
-* @param {String} uuid
 */
 class Book {
     #title;
@@ -99,15 +98,16 @@ class Book {
     #genre;
     #pages;
     #isRead;
-    #uuid;
+    #uuid = window.crypto.randomUUID(); // to reference book updating or removal
 
-    constructor(title, author, genre, pages, isRead, uuid) {
-        this.#title = title; // r
-        this.#author = author; // r 
-        this.#genre = genre; // r
-        this.#pages = pages; // r
-        this.#isRead = isRead; // rw (write via function toggleIsRead())
-        this.#uuid = uuid; // r
+    // All properties are read-only except isRead, which can be modified by 
+    // calling toggleIsRead()
+    constructor(title, author, genre, pages, isRead) {
+        this.#title = title; 
+        this.#author = author;  
+        this.#genre = genre; 
+        this.#pages = pages; 
+        this.#isRead = isRead; 
     }
 
     get title() { return this.#title; }
@@ -149,8 +149,7 @@ class Book {
 function addBookToLibrary(title, author, genre, pages, isRead) {
     pages = +pages || "";
     isRead = (isRead === "true");   
-    const uuid = window.crypto.randomUUID();
-    const book = new Book(title, author, genre, pages, isRead, uuid);
+    const book = new Book(title, author, genre, pages, isRead);
     
     library.push(book);
     displayBooks();
