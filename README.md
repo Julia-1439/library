@@ -1,22 +1,23 @@
 # library
 
-A personal library project integrating recent learnings in Javascript with my current knowledge in HTML & CSS. 
+A personal library project created using Javascript object constructors and classes. 
 
 ## Reflection
 major learnings/exercised: 
 - prototype inheritance
 - objects
-- "separation of duties" (particularly data storage and displaying)
+- "separation of logic" (particularly internal storage and displaying)
 - tables
 - content within tables: wrapping, width
 - flex & grid together
 - processing data from forms
 - dialog
 - data-* attribute
-- defining classes for common attributes like "major buttons"
+- defining css classes for common attributes like "major buttons"
 - checking & testing browser compatability
+- classes
 
-Time spent: 20 hours + 1:45 hour incorporating feedback
+Time spent: 20 hours + 1:45 hour incorporating feedback + 1:30 assignment to refactor using classes and redocument code (why am I timing myself so rigorously? I don't know.)
 
 Known bug: Samsung Internet does not show the modal when clicking Add a Book. 
 
