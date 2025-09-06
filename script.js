@@ -166,6 +166,7 @@ function addBookToLibrary(title, author, genre, pages, isRead) {
 * updated information. 
 */
 function displayBooks() {
+    // An alternative is to set innerHTML to empty string
     while (tableBody.firstChild) {
         tableBody.removeChild(tableBody.lastChild);
     }
@@ -179,7 +180,7 @@ function displayBooks() {
 /**
  * Utilized by `displayBooks()` to display books to the user
  * @param {Book} book 
- * @returns <tr> element containing `book`'s data
+ * @returns HTML <tr> containing `book`'s data
  */
 function createBookElement(book) {
     const row = document.createElement("tr");
@@ -217,7 +218,7 @@ function createBookElement(book) {
  * time `createBookElement()` is called. 
  * @param {String} action one of "remove" or "read" 
  * @param {String} bookUuid 
- * @returns 
+ * @returns HTML <button>
  */
 function createActionButton(action, bookUuid) {
     const btn = document.createElement("button");
