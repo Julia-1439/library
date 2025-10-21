@@ -23,6 +23,26 @@ addABookBtn.addEventListener("click", () => {
   dialog.showModal();
 });
 
+/* Add custom validation messages for empty required fields */
+const submitBtn = document.getElementById("confirm-add-book");
+const bookTitle = document.getElementById("book-title");
+const bookAuthor = document.getElementById("book-author");
+submitBtn.addEventListener("click", (evt) => {
+
+  if (bookTitle.validity.valueMissing) {
+    bookTitle.setCustomValidity("The title must be filled!");
+  } else {
+    bookTitle.setCustomValidity("");
+  } 
+
+  if (bookAuthor.validity.valueMissing) {
+    bookAuthor.setCustomValidity("The author name must be filled!");
+  } else {
+    bookAuthor.setCustomValidity("");
+  }
+
+});
+
 /* Enable processing the form data once it is submitted or cancelled */
 const form = document.querySelector("form");
 form.addEventListener("submit", (evt) => {
