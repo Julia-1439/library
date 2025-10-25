@@ -16,6 +16,7 @@ major learnings/exercised:
 - defining css classes for common attributes like "major buttons"
 - checking & testing browser compatability
 - classes
+- checking for form validation using JS and custom error message
 
 Time spent: 20 hours + 1:45 hour incorporating feedback + 1:30 assignment to refactor using classes and redocument code (why am I timing myself so rigorously? I don't know.)
 
